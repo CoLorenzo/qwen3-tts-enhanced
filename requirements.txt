@@ -1,0 +1,10 @@
+# Core
+torch
+torchaudio
+qwen-tts
+gradio
+
+# Audio processing
+soundfile
+numpy
+noisereduce

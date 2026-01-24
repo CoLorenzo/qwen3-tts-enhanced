@@ -1,0 +1,21 @@
+services:
+  qwen-tts:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./saved_voices:/app/saved_voices
+      - ./outputs:/app/outputs
+      - hf_cache:/root/.cache/huggingface
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
+    shm_size: '8gb'
+    restart: unless-stopped
+
+volumes:
+  hf_cache:
