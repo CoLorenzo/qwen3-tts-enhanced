@@ -13,6 +13,11 @@ matplotlib.use('Agg')
 import gradio as gr
 import torch
 import soundfile as sf
+
+# Log Flash Attention availability
+if torch.cuda.is_available():
+    flash_available = torch.backends.cuda.flash_sdp_enabled()
+    print(f"Flash Attention: {'✓ Available' if flash_available else '✗ Not available'}")
 import numpy as np
 import pickle
 import shutil
