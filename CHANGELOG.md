@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.2 - 2026-01-25
+
+- Fixed Gradio 6.0 file access error for saved voices
+- Fixed Gradio 6.0 theme deprecation warning
+- Suppressed pip PATH warnings during install
+
 ## 1.2.1 - 2026-01-25
 
 - Fixed embedded Python install (venv module not included in embeddable package)

@@ -145,7 +145,7 @@ echo.
 
 :: Install PyTorch with CUDA first (most critical)
 echo       [4a] PyTorch + CUDA 12.4...
-"!PIP_EXE!" install torch torchaudio --index-url https://download.pytorch.org/whl/cu124
+"!PIP_EXE!" install --no-warn-script-location torch torchaudio --index-url https://download.pytorch.org/whl/cu124
 if %errorlevel% neq 0 (
     echo.
     echo ERROR: PyTorch installation failed.
@@ -157,7 +157,7 @@ if %errorlevel% neq 0 (
 :: Install other dependencies
 echo.
 echo       [4b] Qwen-TTS and dependencies...
-"!PIP_EXE!" install qwen-tts gradio noisereduce platformdirs matplotlib
+"!PIP_EXE!" install --no-warn-script-location qwen-tts gradio noisereduce platformdirs matplotlib
 if %errorlevel% neq 0 (
     echo.
     echo ERROR: Dependency installation failed.

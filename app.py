@@ -600,7 +600,7 @@ def design_and_save(name, sample_text, language, instruct):
 
 # ==================== BUILD UI ====================
 # delete_cache: (frequency_seconds, age_seconds) - cleans cache hourly for files older than 1 hour
-with gr.Blocks(title="Qwen3-TTS Enhanced", theme=gr.themes.Soft(), analytics_enabled=False, delete_cache=(3600, 3600)) as app:
+with gr.Blocks(title="Qwen3-TTS Enhanced", analytics_enabled=False, delete_cache=(3600, 3600)) as app:
     gr.Markdown("# 🎙️ Qwen3-TTS Enhanced")
     gr.Markdown("**Clone voices, create new ones, generate speech - 100% local.**")
     
@@ -924,4 +924,10 @@ if __name__ == "__main__":
     print("  Qwen3-TTS Enhanced")
     print("  Browser will open automatically when ready...")
     print("=" * 50)
-    app.launch(server_name="0.0.0.0", server_port=8000, inbrowser=True)
+    app.launch(
+        server_name="0.0.0.0", 
+        server_port=8000, 
+        inbrowser=True,
+        allowed_paths=[str(VOICES_DIR), str(OUTPUTS_DIR)],
+        theme=gr.themes.Soft()
+    )
