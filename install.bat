@@ -152,8 +152,8 @@ echo       This may take several minutes on first run.
 echo.
 
 :: Install PyTorch with CUDA first (most critical)
-echo       [4a] PyTorch + CUDA 12.6...
-"!PIP_EXE!" install --no-warn-script-location torch torchaudio --index-url https://download.pytorch.org/whl/cu126
+echo       [4a] PyTorch + CUDA 12.8...
+"!PIP_EXE!" install --no-warn-script-location torch torchaudio --index-url https://download.pytorch.org/whl/cu128
 if %errorlevel% neq 0 (
     echo.
     echo ERROR: PyTorch installation failed.

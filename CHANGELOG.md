@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.1 - 2026-01-26
+
+- Bumped CUDA from 12.6 to 12.8 (adds Blackwell/RTX 50 series support)
+
 ## 1.3.0 - 2026-01-26
 
 - SDPA attention for faster inference and lower VRAM (built-in Flash Attention 2)
