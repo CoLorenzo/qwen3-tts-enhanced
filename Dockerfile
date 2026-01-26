@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.4.0-runtime-ubuntu22.04
+FROM nvidia/cuda:12.6.0-runtime-ubuntu22.04
 
 # Prevent interactive prompts during build
 ENV DEBIAN_FRONTEND=noninteractive
@@ -24,7 +24,7 @@ WORKDIR /app
 RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3.12
 
 # Install Python packages
-RUN python3.12 -m pip install torch torchaudio --index-url https://download.pytorch.org/whl/cu124
+RUN python3.12 -m pip install torch torchaudio --index-url https://download.pytorch.org/whl/cu126
 RUN python3.12 -m pip install qwen-tts gradio noisereduce platformdirs matplotlib
 
 # Copy app

@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.0 - 2026-01-26
+
+- SDPA attention for faster inference and lower VRAM (built-in Flash Attention 2)
+- Bumped CUDA from 12.4 to 12.6, supporting PyTorch 2.7+
+
 ## 1.2.3 - 2026-01-25
 
 - Fixed portable Python hash verification parsing (#3)

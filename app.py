@@ -120,7 +120,7 @@ def get_clone_model():
             "Qwen/Qwen3-TTS-12Hz-1.7B-Base",
             device_map="cuda:0",
             dtype=torch.bfloat16,
-            attn_implementation="eager",  # Disable FlashAttention for Windows
+            attn_implementation="sdpa",
         )
         print("✓ Voice Clone model loaded!")
     return clone_model
@@ -135,7 +135,7 @@ def get_custom_model():
             "Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice",
             device_map="cuda:0",
             dtype=torch.bfloat16,
-            attn_implementation="eager",  # Disable FlashAttention for Windows
+            attn_implementation="sdpa",
         )
         print("✓ Custom Voice model loaded!")
     return custom_model
@@ -150,7 +150,7 @@ def get_design_model():
             "Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign",
             device_map="cuda:0",
             dtype=torch.bfloat16,
-            attn_implementation="eager",  # Disable FlashAttention for Windows
+            attn_implementation="sdpa",
         )
         print("✓ Voice Design model loaded!")
     return design_model
