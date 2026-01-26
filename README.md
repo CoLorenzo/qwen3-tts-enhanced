@@ -33,8 +33,10 @@ An enhanced interface for [Qwen3-TTS](https://github.com/QwenLM/Qwen3-TTS) with 
 ## Requirements
 
 - **Windows 10/11** or **Linux** (Docker)
-- **NVIDIA GPU** with 8GB+ VRAM
+- **NVIDIA GPU** with 8GB+ VRAM (RTX 20 series or newer)
 - **Python 3.10-3.12** (auto-installs a bundled version if needed)
+
+> **GTX 10 series (Pascal)?** Use [v1.2.3](https://github.com/NeoKazuya/qwen3-tts-enhanced/releases/tag/v1.2.3) which includes CUDA 12.4.
 
 ---
 
