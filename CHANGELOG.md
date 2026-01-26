@@ -2,9 +2,9 @@
 
 ## 1.3.1 - 2026-01-26
 
-- Bumped CUDA from 12.6 to 12.8 (adds Blackwell/RTX 50 series support)
+- Bumped CUDA from 12.6 to 12.8 (adds Blackwell/RTX 50 series support) (#3)
+- Log Flash Attention availability at startup (#4)
 - Added GTX 10 series compatibility note to README
-- Log Flash Attention availability at startup
 
 ## 1.3.0 - 2026-01-26
 
