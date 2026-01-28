@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.3.2 - 2026-01-28
+
+- PyTorch and matplotlib caches now stay in `cache/` folder instead of user home directory (#5)
+- Consolidated cache setup into a shared helper for cache configuration
+- Fixed bare except clause in config loading that could swallow KeyboardInterrupt
+- Improved load_config() error handling for clearer, safe failure paths
+- Voice files now consistently use .pt format (design_and_save was using .pkl)
+- Strengthened tests to validate real runtime behavior
+- Fixed Gradio 6.0 theme deprecation warning
+
 ## 1.3.1 - 2026-01-26
 
 - Bumped CUDA from 12.6 to 12.8 (adds Blackwell/RTX 50 series support) (#3)

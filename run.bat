@@ -15,6 +15,9 @@ if exist "venv\Scripts\python.exe" (
 :: Check for embedded Python
 if exist "python\python.exe" (
     set HF_HUB_DISABLE_SYMLINKS_WARNING=1
+    set "PYTHONNOUSERSITE=1"
+    set "TORCH_HOME=%~dp0cache\torch"
+    set "MPLCONFIGDIR=%~dp0cache\matplotlib"
     python\python.exe app.py
     pause
     exit /b 0

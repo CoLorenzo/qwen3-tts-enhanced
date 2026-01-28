@@ -151,6 +151,9 @@ echo [4/4] Installing dependencies...
 echo       This may take several minutes on first run.
 echo.
 
+:: Prevent pip from falling back to user site-packages
+set "PYTHONNOUSERSITE=1"
+
 :: Install PyTorch with CUDA first (most critical)
 echo       [4a] PyTorch + CUDA 12.8...
 "!PIP_EXE!" install --no-warn-script-location torch torchaudio --index-url https://download.pytorch.org/whl/cu128

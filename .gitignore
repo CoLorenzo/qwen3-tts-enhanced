@@ -5,6 +5,9 @@ venv/
 # Embedded Python (portable install)
 python/
 
+# Runtime caches (embedded Python)
+cache/
+
 # Python
 __pycache__/
 *.py[cod]
@@ -32,6 +35,18 @@ Thumbs.db
 
 # Private dev notes
 DEVNOTES.md
+devnotes.md
+
+# Internal test-only files (do not ship)
+/test_v1_3_2.py
+/TESTING.md
+/test_report.py
+/TEST_RESULTS_v1.3.2.md
+/test_results/
+/Dockerfile.test
+/docker-compose.test.yml
+/run_tests.sh
+/.github/workflows/ci.yml
 
 # Old structure (can remove after migration)
 native/

@@ -25,6 +25,7 @@ import os
 import tempfile
 from pathlib import Path
 from datetime import datetime
+import json
 
 # Models (lazy loaded)
 clone_model = None
@@ -55,11 +56,17 @@ def load_config():
     config_path = get_config_path()
     if config_path.exists():
         try:
-            import json
             with open(config_path) as f:
                 return json.load(f)
-        except:
-            pass
+        except FileNotFoundError as e:
+            print(f"Warning: config file not found: {e}")
+            return {}
+        except PermissionError as e:
+            print(f"Warning: cannot read config file: {e}")
+            return {}
+        except json.JSONDecodeError as e:
+            print(f"Warning: invalid config file JSON: {e}")
+            return {}
     return {}
 
 def save_config(config):
@@ -91,8 +98,30 @@ def get_data_dir():
     # Fall back to default
     return get_default_data_dir()
 
+def setup_cache_dirs(data_dir: Path | None = None) -> dict[str, Path]:
+    """Ensure cache directories exist and cache env vars are set if missing."""
+    base_dir = data_dir or get_data_dir()
+    cache_root = base_dir / "cache"
+    torch_cache = cache_root / "torch"
+    mpl_cache = cache_root / "matplotlib"
+
+    torch_cache.mkdir(parents=True, exist_ok=True)
+    mpl_cache.mkdir(parents=True, exist_ok=True)
+
+    if "TORCH_HOME" not in os.environ:
+        os.environ["TORCH_HOME"] = str(torch_cache)
+    if "MPLCONFIGDIR" not in os.environ:
+        os.environ["MPLCONFIGDIR"] = str(mpl_cache)
+
+    return {
+        "cache_root": cache_root,
+        "torch_cache": torch_cache,
+        "mpl_cache": mpl_cache,
+    }
+
 # Data directories (persistent, outside app folder)
 DATA_DIR = get_data_dir()
+setup_cache_dirs(DATA_DIR)
 VOICES_DIR = DATA_DIR / "saved_voices"
 OUTPUTS_DIR = DATA_DIR / "outputs"
 
@@ -326,7 +355,7 @@ def clone_generate(text, language, saved_voice_label, ref_audio, ref_text, num_v
     
     saved_voice = get_voice_value(saved_voice_label)
     m = get_clone_model()
-    num_variations = int(num_variations)
+    num_variations = max(1, int(num_variations))
     
     try:
         all_wavs = []
@@ -511,7 +540,7 @@ def custom_generate(text, language, speaker, instruct, num_variations, auto_save
         return gr.update(visible=True), gr.update(visible=False), gr.update(visible=False), gr.update(visible=False), gr.update(visible=False), "❌ Enter text to generate"
     
     m = get_custom_model()
-    num_variations = int(num_variations)
+    num_variations = max(1, int(num_variations))
     
     try:
         all_wavs = []
@@ -590,8 +619,7 @@ def design_and_save(name, sample_text, language, instruct):
             ref_audio=(wavs[0], sr),
             ref_text=sample_text,
         )
-        with open(VOICES_DIR / f"{name}.pkl", "wb") as f:
-            pickle.dump(prompt, f)
+        torch.save(prompt, VOICES_DIR / f"{name}.pt")
         
         with open(VOICES_DIR / f"{name}.txt", "w", encoding="utf-8") as f:
             f.write(sample_text)
@@ -930,9 +958,9 @@ if __name__ == "__main__":
     print("  Browser will open automatically when ready...")
     print("=" * 50)
     app.launch(
-        server_name="0.0.0.0", 
-        server_port=8000, 
+        server_name="0.0.0.0",
+        server_port=8000,
         inbrowser=True,
         allowed_paths=[str(VOICES_DIR), str(OUTPUTS_DIR)],
-        theme=gr.themes.Soft()
+        theme=gr.themes.Soft(),
     )
